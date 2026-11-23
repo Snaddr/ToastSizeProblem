@@ -7,7 +7,8 @@ On Windows 11 (build 26200, 100% display scaling), a toast's `appLogoOverride` i
 has rendered a toast that has **no `appLogoOverride`**, for example the toast Snipping Tool shows after a
 snip. From then on `appLogoOverride` images are drawn at 48 px.
 
-Restarting `ShellExperienceHost` puts it back to 60 px.
+A reboot puts it back to 60 px (confirmed on a physical machine and on a Windows 365 Cloud PC). On the
+physical machine, restarting `ShellExperienceHost` also did; on the Windows 365 Cloud PC it did not.
 
 It does not depend on package identity, hero images, buttons, or which app sends the toast. A toast without
 `appLogoOverride` from any app fixes it for all apps, even when that app's banners are switched off.
@@ -22,8 +23,9 @@ toast identity and an image that ships with Windows, so nothing else is needed.
 3. Run **command 2** (a toast without `appLogoOverride`).
 4. Run **command 1** again. The same logo is now **48 px**.
 
-To repeat without a reboot, run `Stop-Process -Name ShellExperienceHost -Force`, wait a few seconds, and
-run command 1 again. It is back to 60 px.
+A reboot is the reliable way to repeat it. As a faster shortcut on some machines, run
+`Stop-Process -Name ShellExperienceHost -Force`, wait a few seconds, and run command 1 again. It was back
+to 60 px on a physical Windows 11 machine (build 26200), but not on a Windows 365 Cloud PC.
 
 Photograph the screen to measure the first toast. A Snipping Tool screenshot is itself a toast without
 `appLogoOverride`, so it would change the state before you have measured it.
